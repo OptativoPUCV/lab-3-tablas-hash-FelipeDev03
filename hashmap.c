@@ -93,11 +93,16 @@ void enlarge(HashMap * map) {
 
     // Recorremos el viejo arreglo hasta su final, insertando cada pair valido encontrado al nuevo arreglo
     for (int i = 0; i < oldCapacity; i++){
-        if (oldBuckets[i] != NULL)
+        if (oldBuckets[i] != NULL && oldBuckets[i]->key != NULL)
             insertMap(map, oldBuckets[i]->key, oldBuckets[i]->value);
     }
 
-    // Liberamos memoria
+    // Liberamos los pair validos del arreglo viejo
+    for (int i = 0; i < oldCapacity; i++){
+        if (oldBuckets[i] != NULL) free(oldBuckets[i]);
+    }
+
+    // Liberamos el arreglo viejo
     free(oldBuckets);
 }
 

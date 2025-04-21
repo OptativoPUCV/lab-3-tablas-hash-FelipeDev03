@@ -40,21 +40,40 @@ int is_equal(void* key1, void* key2){
 
 void insertMap(HashMap * map, char * key, void * value) {
     long posicion = hash(key, map->capacity);
-    while (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL){
-        posicion++;
-        if (map->buckets[posicion] == NULL && map->buckets[posicion]->key == NULL){
-           if (is_equal(key, map->buckets[posicion]->key)) return;
-            map->buckets[posicion]->key = key;
-            map->buckets[posicion]->value = value;
+    long inicio = posicion;  // Guardamos la posición inicial para evitar bucles infinitos
+
+    while (1) {
+        Pair * current = map->buckets[posicion];
+
+        // Casilla vacía: se puede insertar
+        if (current == NULL) {
+            Pair * nuevo = malloc(sizeof(Pair));
+            nuevo->key = key;
+            nuevo->value = value;
+            map->buckets[posicion] = nuevo;
             map->size++;
             map->current = posicion;
-        }   
+            return;
+        }
+
+        // Casilla inválida (par borrado): también se puede insertar
+        if (current->key == NULL) {
+            current->key = key;
+            current->value = value;
+            map->size++;
+            map->current = posicion;
+            return;
+        }
+
+        // Si la clave ya existe, no insertamos
+        if (is_equal(current->key, key)) return;
+
+        // Avanzar con comportamiento circular
+        posicion = (posicion + 1) % map->capacity;
+
+        // Si dimos una vuelta completa, salimos
+        if (posicion == inicio) return;  // Mapa lleno o sin lugar disponible
     }
-    if (is_equal(key, map->buckets[posicion]->key)) return;
-    map->buckets[posicion]->key = key;
-    map->buckets[posicion]->value = value;
-    map->size++;
-    map->current = posicion;
 }
 
 void enlarge(HashMap * map) {

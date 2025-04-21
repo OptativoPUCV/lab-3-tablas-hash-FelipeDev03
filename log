@@ -38,3 +38,9 @@ Sun, Apr 20, 2025  8:51:05 PM:
  1 file changed, 2 insertions(+), 2 deletions(-)
  tests:  0|0
 04f29b1
+Sun, Apr 20, 2025  8:54:59 PM: 
+ hashmap.c | 39 +++++++++++++++++++++++++++++----------
+ 1 file changed, 29 insertions(+), 10 deletions(-)
+ tests:  5|4
+total_score: 30/70
+cb0b3b4

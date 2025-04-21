@@ -39,40 +39,41 @@ int is_equal(void* key1, void* key2){
 }
 
 void insertMap(HashMap * map, char * key, void * value) {
+    // Obtener posición y guardarlo como inicio
     long posicion = hash(key, map->capacity);
-    long inicio = posicion;  // Guardamos la posición inicial para evitar bucles infinitos
+    long inicio = posicion;
 
     while (1) {
-        Pair * current = map->buckets[posicion];
+        Pair * pairActual = map->buckets[posicion];
 
-        // Casilla vacía: se puede insertar
-        if (current == NULL) {
-            Pair * nuevo = malloc(sizeof(Pair));
-            nuevo->key = key;
-            nuevo->value = value;
-            map->buckets[posicion] = nuevo;
+        // Inserción con casilla vacia
+        if (pairActual == NULL) {
+            Pair * pairNuevo = malloc(sizeof(Pair));
+            pairNuevo->key = key;
+            pairNuevo->value = value;
+            map->buckets[posicion] = pairNuevo;
             map->size++;
             map->current = posicion;
             return;
         }
 
-        // Casilla inválida (par borrado): también se puede insertar
-        if (current->key == NULL) {
-            current->key = key;
-            current->value = value;
+        // Inserción con key nulo
+        if (pairActual->key == NULL) {
+            pairActual->key = key;
+            pairActual->value = value;
             map->size++;
             map->current = posicion;
             return;
         }
 
-        // Si la clave ya existe, no insertamos
-        if (is_equal(current->key, key)) return;
+        // Si la clave es repetida, no se inserta
+        if (is_equal(pairActual->key, key)) return;
 
         // Avanzar con comportamiento circular
         posicion = (posicion + 1) % map->capacity;
 
-        // Si dimos una vuelta completa, salimos
-        if (posicion == inicio) return;  // Mapa lleno o sin lugar disponible
+        // Con mapa sin casilla disponible, no insertamos cuando volvemos al inicio
+        if (posicion == inicio) return;  
     }
 }
 

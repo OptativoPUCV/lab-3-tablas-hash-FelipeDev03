@@ -116,9 +116,8 @@ Pair * searchMap(HashMap * map,  char * key) {
         // Actualizar current
         map->current = posicion;
         // Si la clave buscada coincide con la actual, retornamos el Pair
-        if (is_equal(map->buckets[posicion]->key, key)){
+        if (is_equal(map->buckets[posicion]->key, key))
             return map->buckets[posicion];
-        }
 
         // Si no, avanzamos a siguiente posición
         posicion = (posicion + 1) % map->capacity;

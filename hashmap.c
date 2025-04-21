@@ -140,20 +140,30 @@ Pair * searchMap(HashMap * map,  char * key) {
 }
 
 Pair * firstMap(HashMap * map) {
+    // Iniciamos el current con 0
     map->current = 0;
-    
-    while (map->current != map->capacity-1){
 
+    // Recorremos el arreglo hasta el final de la capacidad
+    while (map->current != map->capacity-1){
+        // Si la casilla no es vacia y el key no este marcado NULL, retornamos el pair
+        if (map->buckets[map->current] != NULL && map->buckets[map->current]->key != NULL)
+            return map->buckets[map->current];
+
+        // Si no, avanzamos el current a la siguiente posición
+        map->current++;
+    }
+
+    // No hay pair valido
+    return NULL;
+}
+
+Pair * nextMap(HashMap * map) {
+    while (map->current != map->capacity-1){
         if (map->buckets[map->current] != NULL && map->buckets[map->current]->key != NULL)
             return map->buckets[map->current];
 
         map->current++;
     }
-
-    return NULL;
-}
-
-Pair * nextMap(HashMap * map) {
 
     return NULL;
 }

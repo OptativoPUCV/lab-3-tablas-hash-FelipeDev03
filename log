@@ -50,3 +50,14 @@ Sun, Apr 20, 2025  9:21:24 PM:
  tests:  5|4
 total_score: 30/70
 143cf93
+Sun, Apr 20, 2025  9:30:39 PM: 
+ hashmap.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+Compilation failed
+In file included from test.c:4:0:
+hashmap.c: In function 'searchMap':
+hashmap.c:111:10: error: unused variable 'inicio' [-Werror=unused-variable]
+     long inicio = posicion;
+          ^~~~~~
+cc1.exe: all warnings being treated as errors
+56acc42

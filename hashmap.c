@@ -80,19 +80,24 @@ void insertMap(HashMap * map, char * key, void * value) {
 void enlarge(HashMap * map) {
     enlarge_called = 1; //no borrar (testing purposes)
 
+    // Guardamos el arreglo actual y su capacidad actual
     Pair** oldBuckets = map->buckets;
     long oldCapacity = map->capacity;
+
+    // Duplicamos capacidad
     map->capacity *= 2;
 
+    // Creamos un nuevo arreglo con la nueva capacidad y con size en 0
     map->buckets = (Pair**) calloc (map->capacity, sizeof(Pair*));
-
     map->size = 0;
 
+    // Recorremos el viejo arreglo hasta su final, insertando cada pair valido encontrado al nuevo arreglo
     for (int i = 0; i < oldCapacity; i++){
         if (oldBuckets[i] != NULL)
             insertMap(map, oldBuckets[i]->key, oldBuckets[i]->value);
     }
 
+    // Liberamos memoria
     free(oldBuckets);
 }
 

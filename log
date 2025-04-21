@@ -149,3 +149,9 @@ hashmap.c:87:18: error: operation on 'map->buckets' may be undefined [-Werror=se
      ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 cc1.exe: all warnings being treated as errors
 1c3ee63
+Sun, Apr 20, 2025 10:39:00 PM: 
+ hashmap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ tests:  17|0
+total_score: 70/70
+e7e8335

@@ -158,13 +158,19 @@ Pair * firstMap(HashMap * map) {
 }
 
 Pair * nextMap(HashMap * map) {
+    // Empezamos a recorrer con la siguiente posición
     map->current++;
+
+    // Recorrer hasta el final del arreglo
     while (map->current != map->capacity-1){
+        // Si la casilla no es vacia y el key no este marcado NULL, retornamos el pair
         if (map->buckets[map->current] != NULL && map->buckets[map->current]->key != NULL)
             return map->buckets[map->current];
 
+        // Si no, avanzamos el current a la siguiente posición
         map->current++;
     }
-
+    
+    // No hay pair valido
     return NULL;
 }

@@ -43,14 +43,14 @@ void insertMap(HashMap * map, char * key, void * value) {
     while (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL){
         posicion++;
         if (map->buckets[posicion] == NULL && map->buckets[posicion]->key == NULL){
-           if (is_equal(key, map->buckets[posicion]->key)) return;
+           if (is_equal(key, map->buckets[posicion]->key)) return NULL;
             map->buckets[posicion]->key = key;
             map->buckets[posicion]->value = value;
             map->size++;
             map->current = posicion;
         }   
     }
-    if (is_equal(key, map->buckets[posicion]->key)) return;
+    if (is_equal(key, map->buckets[posicion]->key)) return NULL;
     map->buckets[posicion]->key = key;
     map->buckets[posicion]->value = value;
     map->size++;

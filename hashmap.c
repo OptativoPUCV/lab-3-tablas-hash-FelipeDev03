@@ -106,7 +106,7 @@ void eraseMap(HashMap * map,  char * key) {
     long posicion = hash(key, map->capacity);
 
     while (map->buckets[posicion] != NULL){
-        // Si la clave buscada coincide con la actual, marcamos el key de la posición como NULL
+        // Si la clave ingresada coincide con la actual, marcamos el key de la posición como NULL
         if (is_equal(map->buckets[posicion]->key, key)){
             map->buckets[posicion]->key = NULL;
             map->size--;
@@ -127,7 +127,7 @@ Pair * searchMap(HashMap * map,  char * key) {
         // Actualizar current
         map->current = posicion;
 
-        // Si la clave buscada coincide con la actual, retornamos el Pair
+        // Si la clave ingresada coincide con la actual, retornamos el Pair
         if (is_equal(map->buckets[posicion]->key, key))
             return map->buckets[posicion];
 

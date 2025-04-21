@@ -138,3 +138,14 @@ hashmap.c:80:6: note: declared here
       ^~~~~~~
 cc1.exe: all warnings being treated as errors
 fc5aea8
+Sun, Apr 20, 2025 10:38:18 PM: 
+ hashmap.c | 1 -
+ 1 file changed, 1 deletion(-)
+Compilation failed
+In file included from test.c:4:0:
+hashmap.c: In function 'enlarge':
+hashmap.c:87:18: error: operation on 'map->buckets' may be undefined [-Werror=sequence-point]
+     map->buckets = map->buckets = (Pair**) calloc(map->capacity, sizeof(Pair*));
+     ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cc1.exe: all warnings being treated as errors
+1c3ee63
